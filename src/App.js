@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  const buttonText = { text: 'Click me' }
+  const style = { backgroundColor: '#32A9B3', color: 'white' }
+  const labelText = 'Enter name: '
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <label className="label" htmlFor="name">
+          {labelText}
+        </label>
+        <input id="name" type="text" />
+        <button style={style}>{buttonText.text}</button>
+      </div>
     </div>
   );
 }
