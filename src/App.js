@@ -1,23 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
+import SeasonDisplay from './SeasonDisplay'
+import Spinner from './Spinner'
 
-function App() {
+const styles = {
+  fontSize: '40px'
+}
 
-  const buttonText = { text: 'Click me' }
-  const style = { backgroundColor: '#32A9B3', color: 'white' }
-  const labelText = 'Enter name: '
-
-  return (
+class App extends Component {
+  
+  state = {lat: null, errorMsg: '' };
+  componentDidMount() {
+    window.navigator.geolocation.getCurrentPosition(
+      position => this.setState({lat: position.coords.latitude.toFixed(3)}),
+      err => this.setState({errorMsg: err.message}))
+  }
+  
+  render() {
+    if(this.state.errorMsg && !this.state.lat) {
+      return <div>
+        <h1 style={styles}>Error: {this.state.errorMsg}</h1>
+      </div>
+    }
+    if(!this.state.errorMsg && this.state.lat) {
+      return <div>
+        <SeasonDisplay lat={this.state.lat} />
+      </div>
+    }
+    return (
     <div className="App">
       <div>
-        <label className="label" htmlFor="name">
-          {labelText}
-        </label>
-        <input id="name" type="text" />
-        <button style={style}>{buttonText.text}</button>
+        <Spinner />
       </div>
     </div>
-  );
+    );
+  }  
 }
 
 export default App;
