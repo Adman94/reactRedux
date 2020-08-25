@@ -15,8 +15,8 @@ class App extends Component {
       position => this.setState({lat: position.coords.latitude.toFixed(3)}),
       err => this.setState({errorMsg: err.message}))
   }
-  
-  render() {
+
+  renderContent() {
     if(this.state.errorMsg && !this.state.lat) {
       return <div>
         <h1 style={styles}>Error: {this.state.errorMsg}</h1>
@@ -30,10 +30,19 @@ class App extends Component {
     return (
     <div className="App">
       <div>
-        <Spinner />
+        <Spinner message="Please accept location request" />
       </div>
     </div>
     );
+  }
+  
+  render() {
+    return (
+      // className border red just as an example of wrapping all return statements within the same div
+      <div className="border red">
+        {this.renderContent()}
+      </div>
+    )
   }  
 }
 
