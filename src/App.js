@@ -1,23 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
+import SearchBar from './components/SearchBar';
 
-function App() {
-
-  const buttonText = { text: 'Click me' }
-  const style = { backgroundColor: '#32A9B3', color: 'white' }
-  const labelText = 'Enter name: '
-
-  return (
-    <div className="App">
-      <div>
-        <label className="label" htmlFor="name">
-          {labelText}
-        </label>
-        <input id="name" type="text" />
-        <button style={style}>{buttonText.text}</button>
+class App extends Component {
+  render() {
+    return (
+      <div className="ui container" style={{ marginTop: '10px' }}>
+        <SearchBar />
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
