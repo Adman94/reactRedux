@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './SearchBar.css'
 
 export default class SearchBar extends Component {
   // constructor(props) {
@@ -19,7 +20,7 @@ export default class SearchBar extends Component {
       <div className="ui segment">
         <form onSubmit={this.onFormSubmit} className="ui form">
           <div className="field">
-            <label htmlFor="">Image Search</label>
+            <label className="label" htmlFor="">Type a category to search images</label>
             <input
               type="text"
               value={this.state.term}
