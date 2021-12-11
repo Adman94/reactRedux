@@ -1,23 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
+import unsplash from './api/unsplash';
 import './App.css';
+import SearchBar from './components/SearchBar';
+import ImageList from './components/ImageList';
 
-function App() {
-
-  const buttonText = { text: 'Click me' }
-  const style = { backgroundColor: '#32A9B3', color: 'white' }
-  const labelText = 'Enter name: '
-
-  return (
-    <div className="App">
-      <div>
-        <label className="label" htmlFor="name">
-          {labelText}
-        </label>
-        <input id="name" type="text" />
-        <button style={style}>{buttonText.text}</button>
+class App extends Component {
+  state = { images: [] };
+  onSearchSubmit = async (term) => {
+    const response = await unsplash.get('https://api.unsplash.com/search/photos', {
+      params: { query: term }
+    })
+    this.setState({ images: response.data.results });
+  }
+  render() {
+    return (
+      <div className="ui container" style={{ marginTop: '10px' }}>
+        <SearchBar onSubmit={this.onSearchSubmit} />
+        <ImageList images={this.state.images} />
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
